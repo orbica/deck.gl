@@ -103,7 +103,15 @@ export default class GeoJsonLayer extends CompositeLayer {
     const {pointFeatures, lineFeatures, polygonFeatures, polygonOutlineFeatures} = features;
 
     // Layer composition props
-    const {stroked, filled, extruded, wireframe, subLayers, lightSettings} = this.props;
+    const {
+      stroked,
+      filled,
+      extruded,
+      wireframe,
+      subLayers,
+      lightSettings,
+      transitions
+    } = this.props;
 
     // Rendering props underlying layer
     const {
@@ -159,7 +167,14 @@ export default class GeoJsonLayer extends CompositeLayer {
           getPolygon: getCoordinates,
           getElevation,
           getFillColor,
-          getLineColor
+          getLineColor,
+
+          transitions: transitions && {
+            getPolygon: transitions.geometry,
+            getElevation: transitions.getElevation,
+            getFillColor: transitions.getFillColor,
+            getLineColor: transitions.getLineColor
+          }
         }
       );
 
@@ -190,7 +205,13 @@ export default class GeoJsonLayer extends CompositeLayer {
           getPath: getCoordinates,
           getColor: getLineColor,
           getWidth: getLineWidth,
-          getDashArray: getLineDashArray
+          getDashArray: getLineDashArray,
+
+          transitions: transitions && {
+            getPath: transitions.geometry,
+            getColor: transitions.getColor,
+            getWidth: transitions.getWidth
+          }
         }
       );
 
@@ -216,7 +237,14 @@ export default class GeoJsonLayer extends CompositeLayer {
 
           getPath: getCoordinates,
           getColor: getLineColor,
-          getWidth: getLineWidth
+          getWidth: getLineWidth,
+          getDashArray: getLineDashArray,
+
+          transitions: transitions && {
+            getPath: transitions.geometry,
+            getColor: transitions.getColor,
+            getWidth: transitions.getWidth
+          }
         }
       );
 
@@ -240,7 +268,13 @@ export default class GeoJsonLayer extends CompositeLayer {
 
           getPosition: getCoordinates,
           getColor: getFillColor,
-          getRadius
+          getRadius,
+
+          transitions: transitions && {
+            getPosition: transitions.geometry,
+            getColor: transitions.getColor,
+            getRadius: transitions.getRadius
+          }
         }
       );
 
